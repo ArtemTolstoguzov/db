@@ -13,10 +13,10 @@ namespace ConsoleApp
 
         private Program(string[] args)
         {
-            userRepo = new MongoUserRepository(
-                new MongoClient("mongodb+srv://admin:po1si2tron3@cluster0.bqnnl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-                    .GetDatabase("game"));
-            gameRepo = new InMemoryGameRepository();
+            var dataBase = new MongoClient("mongodb+srv://admin:po1si2tron3@cluster0.bqnnl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+                .GetDatabase("game");
+            userRepo = new MongoUserRepository(dataBase);
+            gameRepo = new MongoGameRepository(dataBase);
         }
     
         public static void Main(string[] args)
